@@ -4,7 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { green } from "@mui/material/colors";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar_Compoennts/Navbar";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";

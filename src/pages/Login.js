@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import "../styles/Login.css";
 
-import LoginNav from "../components/LoginNav";
+import LoginNav from "../components/Navbar_Compoennts/LoginNav.js";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import MyContext from "../components/MyContext";
+import { AuthContext } from "../Context/AuthProvider.js";
+
 
 const Login = () => {
-  const {user,setUser} = useContext(MyContext)
+  const {isLoggedIn,setIsLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -52,9 +53,9 @@ const Login = () => {
       })
       .then((data) => {
         if(data.token){
-          sessionStorage.setItem("userToken",`${data.token}`);
-          sessionStorage.setItem("userName",`${data.data.name}`)
-          setUser(data.name);
+          localStorage.setItem("userToken",`${data.token}`);
+          localStorage.setItem("userName",`${data.data.name}`)
+          setIsLoggedIn(true);
           navigate('/');
         }
         console.log(data);

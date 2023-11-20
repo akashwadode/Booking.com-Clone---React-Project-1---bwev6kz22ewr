@@ -10,25 +10,15 @@ import "../styles/App.css";
 import Stays from "./Stays";
 import Login from "./Login";
 import Register from "./Register";
-import { useEffect, useState } from "react";
-import MyContext from "../components/MyContext";
+
 import Flights from "./Flights";
 import HotelDetails from "./HotelDetails";
-import Navbar from "../components/Navbar";
+import AuthProvider from "../Context/AuthProvider";
 
 function App() {
-  const [user,setUser] = useState("");
-  let loggedInState;
-  const userName = sessionStorage.getItem('userName');
-  if(userName){
-    console.log("user is ",userName);
-    loggedInState=true;
-  }else{
-    console.log("user not present");
-  }
-
+  
   return (
-    <MyContext.Provider value={{ user, setUser,loggedInState }}>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<Stays />} />
         <Route path="/hotel/:hotelId" element={<HotelDetails />} />
@@ -37,7 +27,7 @@ function App() {
         <Route path="/flights" element={<Flights />} />
         <Route path="*" element={<p>Page does not exists.</p>} />
       </Routes>
-    </MyContext.Provider>
+    </AuthProvider>
   );
 }
 

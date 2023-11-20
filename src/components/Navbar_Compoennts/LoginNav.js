@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from '../images/booking-ar21.svg'
+import Logo from '../../images/booking-ar21.svg'
 import { useNavigate } from "react-router-dom";
 const LoginNav = () => {
   const navigate = useNavigate();

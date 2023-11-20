@@ -10,11 +10,12 @@ import PlaceIcon from "@mui/icons-material/Place";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import Facilities from "../components/HotelDetailComponents/Facilities";
 import RoomTable from "../components/HotelDetailComponents/RoomTable";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar_Compoennts/Navbar";
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import HouseRules from "../components/HotelDetailComponents/HouseRules";
 
 const HotelDetails = () => {
+  console.log("inside hotel details");
   const { hotelId } = useParams();
   let [hotelData, setHotelData] = useState(null);
   const [imageData, setImageData] = useState(null);

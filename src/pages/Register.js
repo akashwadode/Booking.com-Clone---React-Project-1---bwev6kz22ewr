@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import LoginNav from "../components/LoginNav";
+import LoginNav from "../components/Navbar_Compoennts/LoginNav";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
