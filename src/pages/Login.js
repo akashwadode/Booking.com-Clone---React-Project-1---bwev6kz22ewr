@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import "./../../styles/Login.css";
+import React, { useContext, useState } from "react";
+import "../styles/Login.css";
 
-import LoginNav from "../pages/LoginNav";
+import LoginNav from "../components/LoginNav";
 import { Button } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
-import Register from "./Register";
+import { useNavigate } from "react-router-dom";
+import MyContext from "../components/MyContext";
 
 const Login = () => {
+  const {user,setUser} = useContext(MyContext)
   const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const Login = () => {
   const requestOptions = {
     method: "POST",
     headers: {
-      projectId: "bwev6kz22ewr",
+      "projectId": "bwev6kz22ewr",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(loginData),
@@ -50,12 +51,19 @@ const Login = () => {
         }
       })
       .then((data) => {
+        if(data.token){
+          sessionStorage.setItem("userToken",`${data.token}`);
+          sessionStorage.setItem("userName",`${data.data.name}`)
+          setUser(data.name);
+          navigate('/');
+        }
         console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return (
     <div>
       <LoginNav />

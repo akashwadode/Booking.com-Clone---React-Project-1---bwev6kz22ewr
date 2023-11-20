@@ -1,0 +1,42 @@
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+
+  .logo-container {
+    width: 100%;
+    flex: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    box-sizing: border-box;
+    > div:first-child {
+      flex: 1;
+    }
+    > div img {
+      width: 140px;
+    }
+  }
+
+  .navlink-container {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    border: 2px solid pink;
+    box-sizing: border-box;
+  }
+}
+
+#profile-icon-container {
+  position: relative;
+  background-color: black;
+  margin-right: 10px;
+}
+#profile-menu {
+  position: absolute;
+  right: 0;
+  /* display: none; */
+}

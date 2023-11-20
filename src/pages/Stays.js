@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import './../../../src/styles/Stays.css'
+import React, { useEffect, useState } from "react";
+import "../styles/Stays.css";
 import CheckIcon from "@mui/icons-material/Check";
 import { green } from "@mui/material/colors";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import RatingStar from "../components/HotelDetailComponents/RatingStar";
+import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
+import HotelDetails from "./HotelDetails";
+
 const Stays = () => {
+  const navigate = useNavigate();
   const [searchLocation, setSearchLocation] = useState("mumbai");
   const [hotelData, setHotelData] = useState([]);
 
@@ -47,13 +53,27 @@ const Stays = () => {
         console.error(error);
       });
   }
+  useEffect(() => {
+    fetchData(
+      `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`
+    );
+  }, []);
 
+  function hotelCardClickHandle(e) {
+    const hotelId = e.currentTarget.id;
+    navigate(`/hotel/${hotelId}`);
+  }
   const RenderHotelCard = () => {
     return (
       <div>
         {hotelData.map((item, index) => {
           return (
-            <div className="hotel-card" key={index} id={item._id}>
+            <div
+              className="hotel-card"
+              key={index}
+              id={item._id}
+              onClick={hotelCardClickHandle}
+            >
               <div className="hotel-image">
                 <div>
                   <img src={item.images[0]} alt="hotel image" />
@@ -65,7 +85,8 @@ const Stays = () => {
                 <div className="hotel-detail-header">
                   <div className="hotel-detail-header-left">
                     <h3>
-                      {item.name} <span>{item.rating}</span>
+                      {item.name}
+                      <RatingStar star={item.rating} />
                     </h3>
                     <p className="hotel-location">{item.location}</p>
                   </div>
@@ -82,14 +103,7 @@ const Stays = () => {
                     </p>
                   </div>
                   <div className="hotel-detail-footer-right">
-                    <h3>
-                      <span>&#8377; </span>
-                      {item.rooms[0].costDetails.baseCost}
-                    </h3>
-                    <p className="taxesAndCharges">
-                      +<span>&#8377; </span>
-                      {item.rooms[0].costDetails.taxesAndFees} taxes and charges
-                    </p>
+                    <PriceDetails costDetails={item.rooms[0].costDetails} />
                     <Button
                       size="small"
                       variant="contained"
@@ -98,7 +112,6 @@ const Stays = () => {
                       See avaibility &nbsp;
                       <ArrowForwardIcon fontSize="small" />
                     </Button>
-                    {/* <button className="availBtn">See availability &nbsp; <ArrowForwardIcon fontSize="small" /></button> */}
                   </div>
                 </div>
               </div>
@@ -110,8 +123,8 @@ const Stays = () => {
   };
   return (
     <>
-    <Navbar />
-
+     
+      <Navbar />
       <form onSubmit={searchSubmitHandler}>
         <input
           type="text"

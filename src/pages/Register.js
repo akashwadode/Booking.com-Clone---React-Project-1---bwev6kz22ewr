@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import LoginNav from "../pages/LoginNav";
+import LoginNav from "../components/LoginNav";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -55,7 +55,6 @@ const Register = () => {
       })
       .catch((err) => {
         console.error(err);
-        console.log("hello");
       });
   }
   return (
