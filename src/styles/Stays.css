@@ -95,3 +95,10 @@
     }
   }
   
+ #stays-main-container{
+  display: flex;
+  flex-direction: column;
+ }
+ #search-container{
+  display: flex;
+ }

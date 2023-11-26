@@ -1,7 +1,6 @@
 import React from "react";
 
 const ImageGallery = ({ imageData }) => {
-  console.log(imageData);
   return (
     <>
       {imageData && (

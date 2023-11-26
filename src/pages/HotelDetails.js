@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./../styles/hotelDetailsStyle/hotelDetails.css";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -13,9 +13,11 @@ import RoomTable from "../components/HotelDetailComponents/RoomTable";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import HouseRules from "../components/HotelDetailComponents/HouseRules";
+import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
 
 const HotelDetails = () => {
   console.log("inside hotel details");
+  const navigate = useNavigate();
   const { hotelId } = useParams();
   let [hotelData, setHotelData] = useState(null);
   const [imageData, setImageData] = useState(null);
@@ -67,8 +69,11 @@ const HotelDetails = () => {
               </div>
 
               <div id="hotel-header-right">
+             
                 <div id="avail-btn-div">
-                  <Button size="small" variant="contained" className="availBtn">
+                  <Button size="small" variant="contained" className="availBtn" onClick={()=>{
+                    navigate("/checkout");
+                  }}>
                     See avaibility &nbsp;
                     <ArrowForwardIcon fontSize="small" />
                   </Button>
@@ -88,7 +93,7 @@ const HotelDetails = () => {
             </div>
             <div id="hotel-room-table">
               <h3>Rooms Availibility</h3>
-              <RoomTable roomData={hotelData.rooms} />
+              <RoomTable rooms={hotelData.rooms} />
             </div>
             <HouseRules hotelData={hotelData}/>
           </div>

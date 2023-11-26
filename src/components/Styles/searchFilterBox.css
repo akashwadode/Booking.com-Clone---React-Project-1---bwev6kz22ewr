@@ -1,0 +1,7 @@
+#search-filter-container{
+    background-color: rgb(231, 231, 43);
+}
+#filter-form{
+    display: flex;
+    flex-direction: column;
+}

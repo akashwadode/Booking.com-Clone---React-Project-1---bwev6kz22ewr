@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/Stays.css";
 import CheckIcon from "@mui/icons-material/Check";
 import { green } from "@mui/material/colors";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
-import HotelDetails from "./HotelDetails";
+import DateRangeComponent from "../components/DateRangeComponent";
+import SearchFilter from "../components/SearchFilter";
+
 
 const Stays = () => {
   const navigate = useNavigate();
@@ -122,27 +124,30 @@ const Stays = () => {
     );
   };
   return (
-    <>
-     
+    <div id="stays-main-container">
       <Navbar />
-      <form onSubmit={searchSubmitHandler}>
-        <input
+      <form onSubmit={searchSubmitHandler} id="search-container">
+        <TextField
+          placeholder="Where are you going?"
+          variant="outlined"
           type="text"
           name="location"
           value={searchLocation}
           onChange={locationChange}
         />
-        <input type="date" name="fromDate" />
-        <input type="date" name="toDate" />
-        <input type="submit" />
+        <div id="date-input-container">
+          <DateRangeComponent />
+        </div>
       </form>
       <div className="hotel-container">
-        <div className="filter-container">hola</div>
+        <div className="filter-container">
+          <SearchFilter />
+        </div>
         <div className="hotel-data">
           <RenderHotelCard />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
