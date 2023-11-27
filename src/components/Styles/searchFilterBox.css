@@ -5,3 +5,10 @@
     display: flex;
     flex-direction: column;
 }
+#input-date-container{
+    position: relative;
+}
+#search-filter-calender-absolute{
+    position: absolute;
+    /* top: 0;    */
+}

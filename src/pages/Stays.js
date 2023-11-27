@@ -5,28 +5,30 @@ import { green } from "@mui/material/colors";
 import { Button, TextField } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
-import DateRangeComponent from "../components/DateRangeComponent";
 import SearchFilter from "../components/SearchFilter";
 
-
 const Stays = () => {
+  const { location } = useParams();
+  console.log(location);
   const navigate = useNavigate();
-  const [searchLocation, setSearchLocation] = useState("mumbai");
+  const [searchLocation, setSearchLocation] = useState("");
   const [hotelData, setHotelData] = useState([]);
-
-  const locationChange = (e) => {
-    setSearchLocation(e.target.value);
-  };
-
-  const searchSubmitHandler = (e) => {
-    e.preventDefault();
-    fetchData(
-      `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`
-    );
-  };
+  const updateSearchLocation =(location)=>{
+    setSearchLocation(location);
+    navigate(`/hotels/${location}`)
+  }
+  useEffect(() => {
+    setSearchLocation(location);
+  }, []);
 
   function fetchData(url) {
     fetch(url, {
@@ -56,14 +58,18 @@ const Stays = () => {
       });
   }
   useEffect(() => {
-    fetchData(
-      `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`
-    );
-  }, []);
+    if (searchLocation) {
+      fetchData(
+        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`
+      );
+    } else {
+      console.log("location not set");
+    }
+  }, [searchLocation]);
 
   function hotelCardClickHandle(e) {
     const hotelId = e.currentTarget.id;
-    navigate(`/hotel/${hotelId}`);
+    navigate(`/hotels/${searchLocation}/${hotelId}`);
   }
   const RenderHotelCard = () => {
     return (
@@ -126,22 +132,9 @@ const Stays = () => {
   return (
     <div id="stays-main-container">
       <Navbar />
-      <form onSubmit={searchSubmitHandler} id="search-container">
-        <TextField
-          placeholder="Where are you going?"
-          variant="outlined"
-          type="text"
-          name="location"
-          value={searchLocation}
-          onChange={locationChange}
-        />
-        <div id="date-input-container">
-          <DateRangeComponent />
-        </div>
-      </form>
       <div className="hotel-container">
         <div className="filter-container">
-          <SearchFilter />
+          <SearchFilter initLocation={location} UpdateSearchLocation={updateSearchLocation}/>
         </div>
         <div className="hotel-data">
           <RenderHotelCard />

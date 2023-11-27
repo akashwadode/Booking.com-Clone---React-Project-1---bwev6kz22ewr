@@ -11,12 +11,11 @@ import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import Facilities from "../components/HotelDetailComponents/Facilities";
 import RoomTable from "../components/HotelDetailComponents/RoomTable";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
-import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
 import HouseRules from "../components/HotelDetailComponents/HouseRules";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
 
 const HotelDetails = () => {
-  console.log("inside hotel details");
   const navigate = useNavigate();
   const { hotelId } = useParams();
   let [hotelData, setHotelData] = useState(null);
@@ -26,7 +25,6 @@ const HotelDetails = () => {
   useEffect(() => {
     fetchHotelDetails();
   }, []);
-
   useEffect(() => {
     if (hotelData) {
       setImageData(hotelData.images);
@@ -52,7 +50,7 @@ const HotelDetails = () => {
   }
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="hotel-details-container">
         {hotelData && (
           <div>
@@ -69,11 +67,15 @@ const HotelDetails = () => {
               </div>
 
               <div id="hotel-header-right">
-             
                 <div id="avail-btn-div">
-                  <Button size="small" variant="contained" className="availBtn" onClick={()=>{
-                    navigate("/checkout");
-                  }}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className="availBtn"
+                    onClick={() => {
+                      navigate("/checkout");
+                    }}
+                  >
                     See avaibility &nbsp;
                     <ArrowForwardIcon fontSize="small" />
                   </Button>
@@ -95,7 +97,7 @@ const HotelDetails = () => {
               <h3>Rooms Availibility</h3>
               <RoomTable rooms={hotelData.rooms} />
             </div>
-            <HouseRules hotelData={hotelData}/>
+            <HouseRules hotelData={hotelData} />
           </div>
         )}
       </div>
