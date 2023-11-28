@@ -1,7 +1,12 @@
-
+#stays-main-container {
+  display: flex;
+  flex-direction: column;
+}
 .hotel-container {
   display: flex;
+  /* padding: 0px 8% */
   flex-direction: row;
+  justify-content: center;
   border: 1px solid black;
 }
 .filter-container {
@@ -94,10 +99,7 @@
     }
   }
 }
-#stays-main-container {
-  display: flex;
-  flex-direction: column;
-}
+
 #search-container {
   display: flex;
 }

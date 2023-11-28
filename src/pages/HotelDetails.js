@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./../styles/hotelDetailsStyle/hotelDetails.css";
+import "./styles/hotelDetails.css";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -11,9 +11,7 @@ import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import Facilities from "../components/HotelDetailComponents/Facilities";
 import RoomTable from "../components/HotelDetailComponents/RoomTable";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
-import AspectRatioIcon from "@mui/icons-material/AspectRatio";
 import HouseRules from "../components/HotelDetailComponents/HouseRules";
-import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
 
 const HotelDetails = () => {
   const navigate = useNavigate();
@@ -50,10 +48,14 @@ const HotelDetails = () => {
   }
   return (
     <>
-      <Navbar />
-      <div className="hotel-details-container">
+      <div className="navbar-main-container">
+        <div className="navbar-container">
+          <Navbar />
+        </div>
+      </div>
+      <div>
         {hotelData && (
-          <div>
+          <div className="hotel-details-container">
             <div id="hotel-details-header">
               <div id="hotel-header-left">
                 <div id="hotel-rating">
@@ -67,6 +69,10 @@ const HotelDetails = () => {
               </div>
 
               <div id="hotel-header-right">
+                <div id="other-icons-div">
+                  <FavoriteBorderIcon />
+                  <ShareIcon />
+                </div>
                 <div id="avail-btn-div">
                   <Button
                     size="small"
@@ -79,10 +85,6 @@ const HotelDetails = () => {
                     See avaibility &nbsp;
                     <ArrowForwardIcon fontSize="small" />
                   </Button>
-                </div>
-                <div id="other-icons-div">
-                  <FavoriteBorderIcon />
-                  <ShareIcon />
                 </div>
               </div>
             </div>

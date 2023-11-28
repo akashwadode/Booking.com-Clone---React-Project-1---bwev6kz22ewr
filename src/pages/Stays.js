@@ -22,10 +22,10 @@ const Stays = () => {
   const navigate = useNavigate();
   const [searchLocation, setSearchLocation] = useState("");
   const [hotelData, setHotelData] = useState([]);
-  const updateSearchLocation =(location)=>{
+  const updateSearchLocation = (location) => {
     setSearchLocation(location);
-    navigate(`/hotels/${location}`)
-  }
+    navigate(`/hotels/${location}`);
+  };
   useEffect(() => {
     setSearchLocation(location);
   }, []);
@@ -131,10 +131,18 @@ const Stays = () => {
   };
   return (
     <div id="stays-main-container">
-      <Navbar />
+      <div className="navbar-main-container">
+        <div className="navbar-container">
+        <Navbar />
+        </div>
+      </div>
+      
       <div className="hotel-container">
         <div className="filter-container">
-          <SearchFilter initLocation={location} UpdateSearchLocation={updateSearchLocation}/>
+          <SearchFilter
+            initLocation={location}
+            UpdateSearchLocation={updateSearchLocation}
+          />
         </div>
         <div className="hotel-data">
           <RenderHotelCard />

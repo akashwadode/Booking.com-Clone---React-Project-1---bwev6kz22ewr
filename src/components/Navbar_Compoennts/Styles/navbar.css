@@ -1,5 +1,11 @@
+.navbar-main-container {
+  color: white;
+  background-color: #003b95;
+  padding: 0px 8%;
+}
 .navbar-container {
   display: flex;
+  /* padding: 0px 8%; */
   flex-direction: column;
   width: 100%;
   height: auto;
