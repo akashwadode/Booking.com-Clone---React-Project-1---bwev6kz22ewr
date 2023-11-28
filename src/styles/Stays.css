@@ -4,9 +4,8 @@
 }
 .hotel-container {
   display: flex;
-  /* padding: 0px 8% */
+  padding: 0px 8%;
   flex-direction: row;
-  justify-content: center;
   border: 1px solid black;
 }
 .filter-container {
@@ -16,7 +15,6 @@
   flex: 3;
 
   .hotel-card {
-    margin: 8px;
     max-width: 585px;
     max-height: 180px;
     display: flex;

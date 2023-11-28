@@ -5,12 +5,7 @@ import "./styles/home.css"
 const Home = () => {
   return (
     <>
-    <div className='navbar-main-container'>
-      <div className='navbar-container'>
-          <Navbar />
-          <HomeSearchBar />
-      </div>
-    </div>
+     
     </>
   )
 }
