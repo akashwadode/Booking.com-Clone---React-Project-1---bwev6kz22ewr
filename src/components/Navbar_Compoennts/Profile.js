@@ -10,7 +10,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { isLoggedIn,setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isClicked, setIsClicked] = useState(false);
 
   const hoverStyle = {
@@ -38,24 +38,30 @@ const Profile = () => {
           Sign In
         </Button>
       ) : (
-        <>
-          <Avatar onClick={iconClickHandler} src="/broken-image.jpg" />
-          <span>{localStorage.getItem("userName")}</span>
-          <Stack
-            direction="row"
-            spacing={2}
-            id="profile-menu"
-            style={hoverStyle}
-          >
-            <Paper>
-              <MenuList>
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>My Account</MenuItem>
-                <MenuItem onClick={userLogOut}>Logout</MenuItem>
-              </MenuList>
-            </Paper>
-          </Stack>
-        </>
+        <div id="navbar-right-container">
+          <div className="menu-main-container">
+            {" "}
+            <Avatar onClick={iconClickHandler} src="/broken-image.jpg" />
+            <div className="menu-container">
+              {" "}
+              <Stack
+                direction="row"
+                spacing={2}
+                id="profile-menu"
+                style={hoverStyle}
+              >
+                <Paper>
+                  <MenuList>
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem>My Account</MenuItem>
+                    <MenuItem onClick={userLogOut}>Logout</MenuItem>
+                  </MenuList>
+                </Paper>
+              </Stack>
+            </div>
+          </div>
+          <div><b>{localStorage.getItem("userName")}</b></div>
+        </div>
       )}
     </div>
   );

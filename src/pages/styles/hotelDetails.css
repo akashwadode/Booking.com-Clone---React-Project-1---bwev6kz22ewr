@@ -1,6 +1,6 @@
 .hotel-details-container {
   width: 100%;
-  padding: 24px;
+  padding: 24px 12%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -11,8 +11,70 @@
   display: flex;
   justify-content: space-between;
 }
-
-#hotel-image-div {
+#hotel-location {
+  margin-top: 8px;
+}
+.hotel-details-image-container {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hotel-details-image-div {
+  flex: 1;
+}
+
+.hotel-details-image {
+  width: 480px;
+  object-fit: cover;
+  height: 300px;
+  display: block;
+}
+.hotel-header-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+h3 {
+  font-size: 24px;
+  /* margin-bottom: 12px; */
+}
+/* Facilities Style */
+.facilities-container {
+  margin-top: 12px;
+}
+.facilities-item-container {
+  display: flex;
+  gap: 20px;
+}
+
+/* Room Table Styles */
+
+.room-table {
+  margin-top: 12px;
+  border-collapse: collapse;
+  width: 100%;
+
+  > thead tr {
+    background-color: #4c76b2;
+    color: white;
+    font-size: 16px;
+  }
+  > thead tr th {
+    padding: 8px;
+  }
+   > tbody tr td {
+    padding: 12px;
+    text-align: center;
+  }
+}
+
+/* House Rules */
+.house-rule-table{
+  width: 100%;
+  margin-top:12px ;
+  border-collapse: collapse;
+  > tr th,td{
+    padding: 12px;
+  }
 }

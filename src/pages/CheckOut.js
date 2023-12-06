@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import AuthNavigator from "../Auth/AuthNavigator";
 import "./styles/checkout.css";
-import Navbar from "../components/Navbar_Compoennts/Navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CheckOut = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const currentRoomData = state;
-  // console.log(currentRoomData)
+
   const [cvvNumber, setCvvNumber] = useState(100);
   const handleCvvNumberInput = (e) => {
     setCvvNumber(e.target.value);
   };
   function handleFormSubmit(e) {
     e.preventDefault();
+    navigate("/booked");
   }
   function totalCost() {
     const costDetails = currentRoomData.costDetails;
@@ -24,13 +25,12 @@ const CheckOut = () => {
   return (
     <>
       <AuthNavigator />
-      <Navbar />
       <div className="main-container">
         {/* PAYMENT DETAILS */}
-        <form id="payment-section">
+        <form id="payment-section" onSubmit={handleFormSubmit}>
           <h2>Payment</h2>
           <label htmlFor="cardName">Card Holder Name</label>
-          <input id="cardName" type="text" name="cardName" />
+          <input id="cardName" type="text" name="cardName" required />
 
           <label htmlFor="cardNumber">Card Number</label>
           <input
@@ -38,24 +38,10 @@ const CheckOut = () => {
             type="number"
             placeholder="0000-0000-0000"
             name="cardNumber"
+            required
           />
           <div>
             {" "}
-            <label htmlFor="expiryMonth">Expiry Month</label>
-            <select id="endDate" className="form-control" required>
-              <option>01</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-            </select>
             <label htmlFor="expiryYear">Expiry Year</label>
             <select id="expiryYear" required>
               <option hidden>YYYY</option>
@@ -68,11 +54,25 @@ const CheckOut = () => {
             </select>
           </div>
           <div>
-            {" "}
+            <label htmlFor="expiryMonth">Expiry Month</label>
+            <select id="endDate" className="form-control" required>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>{" "}
             <label htmlFor="cvvNumber">CVV</label>
             <input
               id="cvvNumber"
-              name="cvvNumber"    
+              name="cvvNumber"
               type="number"
               min={100}
               max={999}

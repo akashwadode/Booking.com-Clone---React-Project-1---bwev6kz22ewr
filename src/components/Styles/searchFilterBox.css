@@ -1,14 +1,50 @@
 #search-filter-container{
     background-color: rgb(231, 231, 43);
+    position: sticky;
+    margin-top: 12px;
+    top: 40px;
+    display: flex;
+    width: 320px;
+    flex-direction: column;
+    padding: 28px;
+    gap: 12px;
+}
+h4{
+    font-size: 20px;
 }
 #filter-form{
     display: flex;
+    margin-top: 12px;
+    font-size: 16px;
+    gap: 12px;
     flex-direction: column;
+}
+.search-filter-child{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.search-filter-child input{
+    padding: 8px;
 }
 #input-date-container{
     position: relative;
 }
 #search-filter-calender-absolute{
     position: absolute;
-    /* top: 0;    */
+    top: 1;
+    left: 0;
+}
+label{
+    font-size: 18px;
+}
+#submit-btn{
+    display: flex;
+    margin-top: 12px;
+    justify-content: end;
+}
+#submit-btn input{
+    flex: 1;
+    font-size: 16px;
+    padding: 8px;
 }

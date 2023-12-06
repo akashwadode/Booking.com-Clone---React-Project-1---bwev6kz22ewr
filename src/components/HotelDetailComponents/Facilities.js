@@ -24,8 +24,7 @@ const Facilities = ({ amenities }) => {
   };
 
   return (
-    <div>
-        
+    <div className="facilities-item-container">
       <RenderFacilities />
     </div>
   );

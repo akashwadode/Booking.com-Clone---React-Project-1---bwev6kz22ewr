@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import DateRangeComponent from "./DateRangeComponent";
 import "./Styles/searchFilterBox.css";
 import { useNavigate } from "react-router-dom";
-const SearchFilter = ({initLocation, UpdateSearchLocation}) => {
+const SearchFilter = ({ initLocation, UpdateSearchLocation,date }) => {
   const [filterLocation, setFilterLocation] = useState(initLocation);
   const [receivedDate, setReceivedDate] = useState("");
   const [openDate, setOpenDate] = useState(false);
-  function handleFilterSubmit(e){
+  function handleFilterSubmit(e) {
     e.preventDefault();
     UpdateSearchLocation(filterLocation);
   }
@@ -14,35 +14,44 @@ const SearchFilter = ({initLocation, UpdateSearchLocation}) => {
     <div id="search-filter-container">
       <h4>Search Filter</h4>
       <form id="filter-form" onSubmit={handleFilterSubmit}>
-        <div id="input-location-container">
+        <div id="input-location-container" className="search-filter-child">
           <label htmlFor="location">location -</label>
-          <input id="location" value={filterLocation} name="location" required onChange={(e)=>{
-            setFilterLocation(e.target.value);
-          }}/>
-        </div>
-        <div id="input-date-container">
-          <label htmlFor="date">date -</label>
           <input
-            type="text"
-            id="date"
-            name="date"
-            placeholder="today"
-            value={receivedDate}
-            onClick={() => {
-              setOpenDate(!openDate);
+            id="location"
+            value={filterLocation}
+            name="location"
+            required
+            onChange={(e) => {
+              setFilterLocation(e.target.value);
             }}
           />
-          {openDate && (
-            <div id="search-filter-calender-absolute">
-              <DateRangeComponent
-                sendDataToParent={(date) => {
-                  setReceivedDate(date);
-                }}
-              />
-            </div>
-          )}
         </div>
-        <div>
+        <div id="input-date-container" className="search-filter-child">
+          <label htmlFor="date">date -</label>
+          <div>
+            {" "}
+            <input
+              type="text"
+              id="date"
+              name="date"
+              placeholder="today"
+              value={receivedDate}
+              onClick={() => {
+                setOpenDate(!openDate);
+              }}
+            />
+            {openDate && (
+              <div id="search-filter-calender-absolute">
+                <DateRangeComponent
+                  sendDataToParent={(date) => {
+                    setReceivedDate(date);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <div id="submit-btn">
           <input type="submit" />
         </div>
       </form>

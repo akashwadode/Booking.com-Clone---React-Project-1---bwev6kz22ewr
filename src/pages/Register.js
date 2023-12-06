@@ -6,20 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [isUserExist, setIsUserExist] = useState(false);
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(userData);
     createUser();
     
   };
-  useEffect(()=>{
-    if(isUserExist){
-      setTimeout(() => {
-        setIsUserExist(false);
-      }, 4000);
-    }
-  },[isUserExist]);
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -49,7 +42,11 @@ const Register = () => {
         console.log(data.status);
         if (data.status !== "success") {
           console.log("fail");
-          setIsUserExist(true);
+          window.alert("User already exist !!");
+
+        }else{
+          window.alert("User account created");
+          navigate('/login');
         }
         console.log(data);
       })
@@ -59,7 +56,6 @@ const Register = () => {
   }
   return (
     <div>
-      <LoginNav />
       <div id="formDiv">
         <form onSubmit={submitHandler} method="post">
           <h3>Sign Up</h3>
@@ -102,8 +98,6 @@ const Register = () => {
         >
           Sign In?
         </p>
-
-        {isUserExist && <p id="invalidMsg">User already exist</p>}
       </div>
     </div>
   );

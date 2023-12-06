@@ -3,9 +3,7 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import "./Styles/dateRangeComponent.css";
-const DateRangeComponent = ({sendDataToParent}) => {
-  // const [startDateState, setStartDateState] = useState("");
-  // const [endDateState, setEndDateState] = useState("");
+const DateRangeComponent = ({ sendDataToParent }) => {
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -31,19 +29,19 @@ const DateRangeComponent = ({sendDataToParent}) => {
     return `${date}/${month}/${year}`;
   }
   return (
-      
-        <DateRangePicker
-          staticRanges={[]}
-          inputRanges={[]}
-          showPreview={false}
-          showDateDisplay={false}
-          minDate={new Date()}
-          ranges={dateRange}
-          onChange={handleSelect}
-          id="date-range-picker"
-        />
-        
-  
+    <div id="date-range-container">
+      <DateRangePicker
+        portalId="root-portal"
+        staticRanges={[]}
+        inputRanges={[]}
+        showPreview={false}
+        showDateDisplay={false}
+        minDate={new Date()}
+        ranges={dateRange}
+        onChange={handleSelect}
+        id="date-range-picker"
+      />
+    </div>
   );
 };
 

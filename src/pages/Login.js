@@ -67,7 +67,6 @@ const Login = () => {
 
   return (
     <div>
-      <LoginNav />
       <div id="formDiv">
         <form onSubmit={submitHandler} method="post">
           <h3>Sign In</h3>

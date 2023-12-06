@@ -11,7 +11,7 @@ const RoomTable = ({ rooms }) => {
     navigate("/checkout", { state: rooms[roomNumberSelect] });
   };
   return (
-    <table>
+    <table border={1} className="room-table">
       <thead>
         <tr>
           <th>Room Type</th>

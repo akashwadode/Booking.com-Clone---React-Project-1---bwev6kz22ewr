@@ -2,29 +2,21 @@ import React from "react";
 
 const ImageGallery = ({ imageData }) => {
   return (
-    <>
+    <div className="hotel-details-image-container">
       {imageData && (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "10px",
-            justifyContent: "center",
-          }}
-        >
-          {imageData.map((item) => (
+          imageData.map((item) => (
+            <div className="hote-details-image-div">
             <img
               key={item}
               src={item}
               alt="hotel-image"
-              width={"200px"}
-              height={"200px"}
+              className="hotel-details-image"
             />
-          ))}
-        </div>
+            </div>
+          ))
+
       )}
-    </>
+    </div>
   );
 };
 

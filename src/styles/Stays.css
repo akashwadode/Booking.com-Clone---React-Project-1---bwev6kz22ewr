@@ -1,34 +1,42 @@
-#stays-main-container {
+.stays-main-container {
   display: flex;
   flex-direction: column;
 }
 .hotel-container {
   display: flex;
-  padding: 0px 8%;
   flex-direction: row;
-  border: 1px solid black;
+  padding: 0px 12%;
+  justify-content: center;
+  gap: 40px;
+  /* border: 1px solid black; */
 }
 .filter-container {
   flex: 1;
 }
 .hotel-data {
+  margin-top: 12px;
   flex: 3;
+  >div{
 
-  .hotel-card {
-    max-width: 585px;
-    max-height: 180px;
     display: flex;
-    border: 1px solid black;
-    border-radius: 4px;
+    flex-direction: column;  
+    gap: 12px;
+    justify-content: center;
+  }
+  .hotel-card {
+    display: flex;
+    border: 2px solid rgb(146, 135, 135);
+    border-radius: 12px;
     flex-direction: row;
 
+   
     .hotel-image {
-      padding: 8px;
+      padding: 12px;
       > div {
         border: 1px solid black;
-        width: 160px;
-        height: 160px;
-        border-radius: 8px;
+        width: 220px;
+        height: 200px;
+        /* border-radius: 8px; */
         overflow: hidden;
       }
       > div img {
@@ -50,13 +58,14 @@
 
         .hotel-detail-header-left {
           flex: 3;
-
+          font-size: 20px;
           .hotel-location {
             text-decoration: underline;
-            font-size: 12px;
+            font-size: 14px;
           }
         }
         .hotel-detail-header-right {
+          
           flex: 1;
         }
       }
@@ -68,7 +77,6 @@
 
         .hotel-detail-footer-left {
           flex: 2;
-
           > p {
             display: flex;
             gap: 4px;
@@ -80,16 +88,13 @@
         .hotel-detail-footer-right {
           display: flex;
           flex-direction: column;
-          justify-content: space-evenly;
+          gap: 20px;
+          justify-content: center;
           flex: 1;
-
-          .taxesAndCharges {
-            font-size: 10px;
-          }
-
+         
           .availBtn {
             display: flex;
-            font-size: 10px;
+            font-size: 14px;
             align-items: center;
           }
         }
@@ -100,4 +105,10 @@
 
 #search-container {
   display: flex;
+}
+.base-cost{
+    font-size: 24px;
+}
+.taxesAndCharges{
+  font-size: 16px;
 }

@@ -6,7 +6,7 @@ import { orange, yellow } from "@mui/material/colors";
 const RatingStar = (prop) => {
   let starCount = prop.star;
   const RenderStar = () => {
-    const starStyle = {fontSize:16, color: orange[400]};
+    const starStyle = {fontSize:24, color: orange[400]};
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (starCount > 0 && starCount < 1) {

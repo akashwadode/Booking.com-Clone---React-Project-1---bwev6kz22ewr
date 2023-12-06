@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles/hotelDetails.css";
 import { Button } from "@mui/material";
@@ -10,10 +10,10 @@ import PlaceIcon from "@mui/icons-material/Place";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import Facilities from "../components/HotelDetailComponents/Facilities";
 import RoomTable from "../components/HotelDetailComponents/RoomTable";
-import Navbar from "../components/Navbar_Compoennts/Navbar";
 import HouseRules from "../components/HotelDetailComponents/HouseRules";
 
 const HotelDetails = () => {
+  const roomsTableRef = useRef(null);
   const navigate = useNavigate();
   const { hotelId } = useParams();
   let [hotelData, setHotelData] = useState(null);
@@ -48,11 +48,6 @@ const HotelDetails = () => {
   }
   return (
     <>
-      <div className="navbar-main-container">
-        <div className="navbar-container">
-          <Navbar />
-        </div>
-      </div>
       <div>
         {hotelData && (
           <div className="hotel-details-container">
@@ -64,11 +59,11 @@ const HotelDetails = () => {
                 <h2 id="hotel-name">{hotelData.name}</h2>
 
                 <div id="hotel-location">
-                  <PlaceIcon /> {hotelData.location}
+                  <PlaceIcon sx={{fontSize:"16px"}}/> {hotelData.location}
                 </div>
               </div>
 
-              <div id="hotel-header-right">
+              <div className="hotel-header-right">
                 <div id="other-icons-div">
                   <FavoriteBorderIcon />
                   <ShareIcon />
@@ -79,7 +74,7 @@ const HotelDetails = () => {
                     variant="contained"
                     className="availBtn"
                     onClick={() => {
-                      navigate("/checkout");
+                      roomsTableRef.current?.scrollIntoView({behavior : 'smooth'});
                     }}
                   >
                     See avaibility &nbsp;
@@ -88,18 +83,21 @@ const HotelDetails = () => {
                 </div>
               </div>
             </div>
-            <div id="hotel-image-div">
+            <div id="hotel-image-main-conatiner">
               <ImageGallery imageData={imageData} />
             </div>
-            <div id="facilities-div">
+            <div className="facilities-container">
               <h3>Most popular facilities</h3>
               <Facilities amenities={hotelData.amenities} />
             </div>
-            <div id="hotel-room-table">
+            <div id="hotel-room-table" ref={roomsTableRef}>
               <h3>Rooms Availibility</h3>
               <RoomTable rooms={hotelData.rooms} />
             </div>
+            <div>
+            <h3>House Rules</h3>
             <HouseRules hotelData={hotelData} />
+            </div>
           </div>
         )}
       </div>

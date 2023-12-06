@@ -7,8 +7,7 @@ const HouseRules = ({hotelData}) => {
     }
   return (
     <>
-        <h3>House rules</h3>
-        <table>
+        <table className='house-rule-table' border={1}>
             <tr>
                 <th><InfoOutlinedIcon sx={iconStyle} />Cancellation</th>
                 <td>{hotelData.rooms[0].cancellationPolicy}</td>
@@ -20,6 +19,7 @@ const HouseRules = ({hotelData}) => {
             <tr>
                 <th><PetsIcon sx={iconStyle}/>Pets</th>
                 <td>Pets are {hotelData.houseRules.restrictions.petsAllowed ? "allowed":"not allowed"} </td>
+
             </tr>
         </table>
     </>

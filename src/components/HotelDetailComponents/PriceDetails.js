@@ -3,7 +3,7 @@ import React from "react";
 const PriceDetails = ({costDetails}) => {
   return (
     <>
-      <h3>
+      <h3 className="base-cost">
         <span>&#8377; </span>
         {costDetails.baseCost}
       </h3>

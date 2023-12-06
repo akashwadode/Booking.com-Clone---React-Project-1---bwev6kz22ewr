@@ -4,10 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { green } from "@mui/material/colors";
 import { Button, TextField } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Navbar from "../components/Navbar_Compoennts/Navbar";
 import {
-  Route,
-  Routes,
   useLocation,
   useNavigate,
   useParams,
@@ -21,15 +18,22 @@ const Stays = () => {
   console.log(location);
   const navigate = useNavigate();
   const [searchLocation, setSearchLocation] = useState("");
+ 
+  const ulrLocation = useLocation();
+  const queryParams = new URLSearchParams(ulrLocation.search);
+  const getDate= queryParams.get("date");
+  const [filterDate,setFilterDate] = useState(getDate)
+
+  useEffect(() => {
+    setSearchLocation(location);
+  }, [location]);
+
   const [hotelData, setHotelData] = useState([]);
   const updateSearchLocation = (location) => {
     setSearchLocation(location);
     navigate(`/hotels/${location}`);
   };
-  useEffect(() => {
-    setSearchLocation(location);
-  }, []);
-
+  
   function fetchData(url) {
     fetch(url, {
       method: "GET",
@@ -49,9 +53,7 @@ const Stays = () => {
         } else {
           console.log("Data fetched successfully");
         }
-        // stores hotels data
         setHotelData(data.data.hotels);
-        console.log(data.data.hotels);
       })
       .catch((error) => {
         console.error(error);
@@ -74,6 +76,7 @@ const Stays = () => {
   const RenderHotelCard = () => {
     return (
       <div>
+        <h3>{hotelData.length} results for "{searchLocation}"</h3>
         {hotelData.map((item, index) => {
           return (
             <div
@@ -92,13 +95,12 @@ const Stays = () => {
                 {/* header  */}
                 <div className="hotel-detail-header">
                   <div className="hotel-detail-header-left">
-                    <h3>
-                      {item.name}
-                      <RatingStar star={item.rating} />
-                    </h3>
+                    <h3>{item.name}</h3>
                     <p className="hotel-location">{item.location}</p>
                   </div>
-                  <div className="hotel-detail-header-right"></div>
+                  <div className="hotel-detail-header-right">
+                    <RatingStar star={item.rating} />
+                  </div>
                 </div>
 
                 {/* footer */}
@@ -111,7 +113,9 @@ const Stays = () => {
                     </p>
                   </div>
                   <div className="hotel-detail-footer-right">
-                    <PriceDetails costDetails={item.rooms[0].costDetails} />
+                    <div>
+                      <PriceDetails costDetails={item.rooms[0].costDetails} />
+                    </div>
                     <Button
                       size="small"
                       variant="contained"
@@ -130,25 +134,22 @@ const Stays = () => {
     );
   };
   return (
-    <div id="stays-main-container">
-      <div className="navbar-main-container">
-        <div className="navbar-container">
-        <Navbar />
+    <>
+      <div className="stays-main-container">
+        <div className="hotel-container">
+          <div className="filter-container">
+            <SearchFilter
+              initLocation={location}
+              UpdateSearchLocation={updateSearchLocation}
+              date={filterDate,setFilterDate}
+            />
+          </div>
+          <div className="hotel-data">
+            <RenderHotelCard />
+          </div>
         </div>
       </div>
-      
-      <div className="hotel-container">
-        <div className="filter-container">
-          <SearchFilter
-            initLocation={location}
-            UpdateSearchLocation={updateSearchLocation}
-          />
-        </div>
-        <div className="hotel-data">
-          <RenderHotelCard />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
