@@ -52,8 +52,6 @@ const Profile = () => {
               >
                 <Paper>
                   <MenuList>
-                    <MenuItem>Profile</MenuItem>
-                    <MenuItem>My Account</MenuItem>
                     <MenuItem onClick={userLogOut}>Logout</MenuItem>
                   </MenuList>
                 </Paper>

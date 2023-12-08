@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../styles/Login.css";
 
-import LoginNav from "../components/Navbar_Compoennts/LoginNav.js";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider.js";

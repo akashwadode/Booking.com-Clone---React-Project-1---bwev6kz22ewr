@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 
 const Flight_Details = () => {
   const { flightId } = useParams();
   let flightData = {};
+  const navigate = useNavigate();
   const apiUrl = `https://academics.newtonschool.co/api/v1/bookingportals/flight/${flightId}`;
   const requestOptions = {
     headers: {
@@ -56,7 +57,9 @@ const Flight_Details = () => {
         <section className="flight-details-section">
           {" "}
           <h2>INR {flightData.ticketPrice}.00 /-</h2>
-          <button>Pay</button>
+          <button onClick={()=>{
+            navigate('/checkout');
+          }}>Pay</button>
         </section>
       </main>
     </div>

@@ -1,23 +1,31 @@
 /* Flight Home */
-.flight-home-container{
+.flight-home-container {
   display: flex;
-  padding: 0px 12%;
+  flex-direction: column;
   height: 100%;
   > div {
-    /* border: 1px solid red; */
     flex: 1;
     position: relative;
   }
 }
+
+/* Flight Search Bar */
+
 .flight-searchbar {
   display: flex;
-  width: 80%;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -28px;
+  z-index: 999;
+  width: 60%;
   margin: auto;
   height: 60px;
+  border: 2px solid yellow;
   > div {
-    border: 1px solid black;
     display: flex;
-    padding: 4px 16px 4px 4px ;
+    padding: 4px 16px 4px 4px;
     flex-direction: row;
     align-items: center;
     > input {
@@ -46,23 +54,33 @@
     padding: 0px;
     > button {
       flex: 1;
+      border: 0;
+      background-color: rgb(1, 109, 228);
+      color: white;
     }
   }
 }
 
-
 /* Flight Result */
+.flight-result-main-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+.flight-result-container {
+  padding: 0px 12%;
+  margin-top: 48px;
+}
 
-
-/* Flight_Card */    
-.flight-card:nth-child(even){
+/* Flight_Card */
+.flight-card:nth-child(even) {
   background-color: rgb(244, 239, 239);
 }
 .flight-card {
   display: flex;
   /* margin: 18px 0px; */
   border: 2px solid #e7e6e6;
-  
 
   .flight-card-left {
     display: flex;
@@ -138,12 +156,11 @@
   }
 }
 
-
-/* Flight Details */  
-.flight-details-container{
+/* Flight Details */
+.flight-details-container {
   display: flex;
   justify-content: center;
-  > main{
+  > main {
     margin-top: 24px;
     padding: 24px;
     border: 1px solid black;
@@ -151,25 +168,75 @@
     flex-direction: column;
     gap: 40px;
 
-    .flight-details-section{
+    .flight-details-section {
       display: flex;
       flex-direction: row;
       gap: 120px;
       justify-content: space-between;
 
-      >div{
+      > div {
         display: flex;
         flex-direction: column;
         gap: 20px;
       }
-      >aside{
+      > aside {
         text-align: end;
       }
-      >button{
+      > button {
         padding: 10px 18px;
       }
     }
+  }
+}
 
-   
+/* Flight Popular Destinations */
+.flight-popular-destination-container {
+  margin-top: 44px;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  display: flex;
+  padding: 0px 12%;
+  /* z-index: 1; */
+  .destination-heading {
+    padding: 12px 0px;
+  }
+  .destination-row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .row {
+    height: 280px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+  }
+  .destination-image-box {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 4%;
+    overflow: hidden;
+  }
+
+  .destination-image-box h3 {
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    left: 10px;
+    top: 10px;
+    z-index: 1;
+  }
+  .destination-image-box img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    /* z-index: 1; */
+    transition: 0.5s all ease-in-out;
+  }
+  .destination-image-box img:hover {
+    transform: scale(1.3);
   }
 }

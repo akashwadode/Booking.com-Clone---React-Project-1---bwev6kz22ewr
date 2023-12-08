@@ -87,25 +87,27 @@ const CheckOut = () => {
         </form>
 
         {/* ORDER DETAILS */}
-        <section id="order-section">
-          <h3>Order Details</h3>
-          <p>
-            <span>Base cost-</span>{" "}
-            <span>&#8377;{currentRoomData.costDetails.baseCost}</span>
-          </p>
-          <p>
-            <span>Taxes-</span>{" "}
-            <span>&#8377;{currentRoomData.costDetails.taxesAndFees}</span>
-          </p>
-          <p>
-            <span>Discount-</span>{" "}
-            <span>&#8377;{currentRoomData.costDetails.discount}</span>
-          </p>
-          <p>
-            <b>Total-</b>
-            <b>&#8377;{totalCost()}</b>
-          </p>
-        </section>
+        {currentRoomData && (
+          <section id="order-section">
+            <h3>Order Details</h3>
+            <p>
+              <span>Base cost-</span>{" "}
+              <span>&#8377;{currentRoomData.costDetails.baseCost}</span>
+            </p>
+            <p>
+              <span>Taxes-</span>{" "}
+              <span>&#8377;{currentRoomData.costDetails.taxesAndFees}</span>
+            </p>
+            <p>
+              <span>Discount-</span>{" "}
+              <span>&#8377;{currentRoomData.costDetails.discount}</span>
+            </p>
+            <p>
+              <b>Total-</b>
+              <b>&#8377;{totalCost()}</b>
+            </p>
+          </section>
+        )}
       </div>
     </>
   );

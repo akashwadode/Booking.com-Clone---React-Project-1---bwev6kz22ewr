@@ -2,8 +2,9 @@ import React from "react";
 import Navbar from "../components/Navbar_Compoennts/Navbar";
 import HomeSearchBar from "../components/HomeComponents/HomeSearchBar";
 import "./styles/home.css";
-import PopularDestination from "../components/HomeComponents/PopularDestination";
 import { useNavigate } from "react-router-dom";
+import Hotel_PopularDestination from "../components/HomeComponents/Hotel_PopularDestination";
+import Footer from "./Footer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ const Home = () => {
     <>
       <HomeSearchBar />
 
-      <PopularDestination />
+      <Hotel_PopularDestination />
+      <Footer />
     </>
   );
 };

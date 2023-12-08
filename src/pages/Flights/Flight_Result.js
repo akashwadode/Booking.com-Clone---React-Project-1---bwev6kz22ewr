@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import useFetch from "../../Hooks/useFetch";
 import Flight_Card from "../../components/Flight_Components/Flight_Card";
 import { useParams } from "react-router-dom";
+import Search_Bar_Flight from "./Flight_Components/Search_Bar_Flight";
 
 const Flight_Result = () => {
-  const {source, destination,date} = useParams();
-  useEffect(()=>{
+  const { source, destination, date } = useParams();
+  useEffect(() => {
     console.log(`${source}  ${destination}  ${date}`);
-  },[source]);
+  }, [source]);
   const requestOptions = {
     headers: {
       projectId: "bwev6kz22ewr",
@@ -29,16 +30,17 @@ const Flight_Result = () => {
   }
 
   return (
-    <div>
-      <h1>Flight Data</h1>
-      <main className="flight-main-container">
+    <div className="flight-result-main-container">
+    <Search_Bar_Flight source={source} destination={destination} date={date}/>
+    <div className="flight-result-container">
+      <main >
         <aside className="flight-filter-container"></aside>
         <section className="flight-data-container">
           <h3>{data.results} results found</h3>
           <Flight_Card flights={data.data.flights} />
         </section>
       </main>
-    </div>
+    </div></div>
   );
 };
 

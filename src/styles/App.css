@@ -5,9 +5,12 @@
   /* color: white; */
 }
 body{
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 }
 
+button{
+  cursor: pointer;
+}
 
 
 

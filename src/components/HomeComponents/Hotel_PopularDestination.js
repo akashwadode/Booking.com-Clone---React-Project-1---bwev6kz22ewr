@@ -1,7 +1,7 @@
 import React from "react";
 import "./Styles/PopularDestination.css";
 import { useNavigate } from "react-router-dom";
-const PopularDestination = () => {
+const Hotel_PopularDestination= () => {
   const navigate = useNavigate();
   const handleDestinationClick = (e) => {
     const tempDestination=e.currentTarget.getAttribute("destinationName");
@@ -22,12 +22,12 @@ const PopularDestination = () => {
           </div>
           <div
             className="destination-image-box"
-            destinationName={"goa"}
+            destinationName={"bangalore"}
             onClick={handleDestinationClick}
           >
-            <h3 className="destination-name">Goa</h3>
+            <h3 className="destination-name">Bangalore</h3>
             <img
-              src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.unsplash.com/photo-1581533961790-5ab6ecdf8254?q=80&w=1191&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="detination-image"
             />
           </div>
@@ -80,4 +80,4 @@ const PopularDestination = () => {
   );
 };
 
-export default PopularDestination;
+export default Hotel_PopularDestination;
