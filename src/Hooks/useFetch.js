@@ -25,7 +25,6 @@ const useFetch = (method,apiUrl,requestOptions) => {
         fetchData();
     },[])
     useEffect(()=>{
-        // console.log('data is -' ,data);
     },[data])
 
     return {data,loading,error};

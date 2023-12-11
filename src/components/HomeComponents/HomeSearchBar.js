@@ -9,8 +9,10 @@ const HomeSearchBar = () => {
   const [searchLocation, setSearchLocation] = useState("");
 
   const [receivedDate, setReceivedDate] = useState("");
+
   const [openDate, setOpenDate] = useState(false);
   const [countOptionOpen, setCountOptionOpen] = useState(false);
+
   const handleLocationInput = (input) => {
     setSearchLocation(input.target.value);
   };

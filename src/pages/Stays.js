@@ -12,6 +12,7 @@ import {
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
 import SearchFilter from "../components/SearchFilter";
+import useFetch from "../Hooks/useFetch";
 
 const Stays = () => {
   const { location } = useParams();
@@ -19,9 +20,11 @@ const Stays = () => {
   const navigate = useNavigate();
   const [searchLocation, setSearchLocation] = useState("");
  
-  const ulrLocation = useLocation();
-  const queryParams = new URLSearchParams(ulrLocation.search);
+  const urlLocation = useLocation();
+  const queryParams = new URLSearchParams(urlLocation.search);
   const getDate= queryParams.get("date");
+
+
   const [filterDate,setFilterDate] = useState(getDate)
 
   useEffect(() => {
@@ -33,7 +36,15 @@ const Stays = () => {
     setSearchLocation(location);
     navigate(`/hotels/${location}`);
   };
-  
+
+  let url = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`;
+  const requestOptions = {
+    headers: {
+      projectId: "bwev6kz22ewr",
+    },
+  }
+  const {data,locading,error} = useFetch("get",url,requestOptions);
+
   function fetchData(url) {
     fetch(url, {
       method: "GET",
@@ -141,7 +152,7 @@ const Stays = () => {
             <SearchFilter
               initLocation={location}
               UpdateSearchLocation={updateSearchLocation}
-              date={filterDate,setFilterDate}
+              date={filterDate}
             />
           </div>
           <div className="hotel-data">

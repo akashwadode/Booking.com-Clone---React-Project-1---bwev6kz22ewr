@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/footer.css"
 const Footer = () => {
-  const navigate = useNavigate();
   const handleEmailSubmit =(e)=>{
     e.preventDefault();
      window.alert("Thank you for support!")
