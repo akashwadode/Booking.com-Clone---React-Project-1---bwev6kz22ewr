@@ -6,7 +6,7 @@ import Flight_PopularDestination from "../../components/Flight_Components/Flight
 import Search_Bar_Flight from "./Flight_Components/Search_Bar_Flight";
 import { getToday } from "../../Utils/GetToday";
 import Footer from "../Footer";
-const Flights_Home = () => {
+const Flight_Home = () => {
   return (
     <main className="flight-home-container">
       <Search_Bar_Flight source={""} destination={""} date={getToday}/>
@@ -16,4 +16,4 @@ const Flights_Home = () => {
   );
 };
 
-export default Flights_Home;
+export default Flight_Home;

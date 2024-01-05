@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
+  const nameRegex = /^[a-zA-Z\s]*$/;
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(userData);
-    createUser();
-    
+    if (!nameRegex.test(userData.name)) {
+      window.alert("Name is not valid");
+    } else {
+      console.log(userData);
+      createUser();
+    }
   };
 
   const [userData, setUserData] = useState({
@@ -38,14 +42,12 @@ const Register = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.status);
         if (data.status !== "success") {
           console.log("fail");
           window.alert("User already exist !!");
-
-        }else{
+        } else {
           window.alert("User account created");
-          navigate('/login');
+          navigate("/login");
         }
         console.log(data);
       })

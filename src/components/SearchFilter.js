@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import DateRangeComponent from "./DateRangeComponent";
 import "./Styles/searchFilterBox.css";
 import { useNavigate } from "react-router-dom";
-const SearchFilter = ({ initLocation, UpdateSearchLocation,date }) => {
+const SearchFilter = ({
+  initLocation,
+  startDate,
+  endDate,
+  setSearchLocation,
+}) => {
+  const navigate = useNavigate();
   const [filterLocation, setFilterLocation] = useState(initLocation);
-  const [receivedDate, setReceivedDate] = useState("");
-  const [openDate, setOpenDate] = useState(false);
+  const [sDate, setSDate] = useState(startDate);
+  const [eDate, setEDate] = useState(endDate);
+
   function handleFilterSubmit(e) {
     e.preventDefault();
-    UpdateSearchLocation(filterLocation);
+    setSearchLocation(filterLocation);
+    navigate(`/hotels/${filterLocation}?startDate=${sDate}&endDate=${eDate}`);
   }
   return (
     <div id="search-filter-container">
@@ -27,28 +35,32 @@ const SearchFilter = ({ initLocation, UpdateSearchLocation,date }) => {
           />
         </div>
         <div id="input-date-container" className="search-filter-child">
-          <label htmlFor="date">date -</label>
           <div>
-            {" "}
+            <label htmlFor="startDate">from</label>
             <input
-              type="text"
-              id="date"
-              name="date"
-              placeholder="today"
-              value={receivedDate}
-              onClick={() => {
-                setOpenDate(!openDate);
+              type="date"
+              value={sDate}
+              name="startDate"
+              onChange={(e) => {
+                setSDate(e.target.value);
               }}
+              min={new Date().toISOString().split("T")[0]}
+              required
             />
-            {openDate && (
-              <div id="search-filter-calender-absolute">
-                <DateRangeComponent
-                  sendDataToParent={(date) => {
-                    setReceivedDate(date);
-                  }}
-                />
-              </div>
-            )}
+          </div>
+
+          <div>
+            <label htmlFor="endDate">to</label>
+            <input
+              type="date"
+              value={eDate}
+              name="startDate"
+              onChange={(e) => {
+                setEDate(e.target.value);
+              }}
+              min={sDate ? sDate : ""}
+              required
+            />
           </div>
         </div>
         <div id="submit-btn">

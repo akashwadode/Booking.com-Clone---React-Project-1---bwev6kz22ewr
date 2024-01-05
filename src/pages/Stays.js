@@ -4,90 +4,53 @@ import CheckIcon from "@mui/icons-material/Check";
 import { green } from "@mui/material/colors";
 import { Button, TextField } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import RatingStar from "../components/HotelDetailComponents/RatingStar";
 import PriceDetails from "../components/HotelDetailComponents/PriceDetails";
 import SearchFilter from "../components/SearchFilter";
 import useFetch from "../Hooks/useFetch";
 
 const Stays = () => {
-  const { location } = useParams();
-  console.log(location);
+  const { locationParam } = useParams();
   const navigate = useNavigate();
-  const [searchLocation, setSearchLocation] = useState("");
- 
+  
+// to get url params
   const urlLocation = useLocation();
   const queryParams = new URLSearchParams(urlLocation.search);
-  const getDate= queryParams.get("date");
-
-
-  const [filterDate,setFilterDate] = useState(getDate)
-
-  useEffect(() => {
-    setSearchLocation(location);
-  }, [location]);
+  const startDate = queryParams.get("startDate");
+  const endDate = queryParams.get("endDate");
+  const [searchLocation, setSearchLocation] = useState(locationParam);
 
   const [hotelData, setHotelData] = useState([]);
-  const updateSearchLocation = (location) => {
-    setSearchLocation(location);
-    navigate(`/hotels/${location}`);
-  };
+  
 
-  let url = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`;
   const requestOptions = {
     headers: {
       projectId: "bwev6kz22ewr",
     },
-  }
-  const {data,locading,error} = useFetch("get",url,requestOptions);
+  };
+  const url = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`;
 
-  function fetchData(url) {
-    fetch(url, {
-      method: "GET",
-      headers: {
-        projectId: "bwev6kz22ewr",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Some error in response");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data.message !== "success") {
-          throw new Error("Didn't get the data");
-        } else {
-          console.log("Data fetched successfully");
-        }
-        setHotelData(data.data.hotels);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  const { data, loading, error } = useFetch("get", url, requestOptions);
+
   useEffect(() => {
-    if (searchLocation) {
-      fetchData(
-        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${searchLocation}"}`
-      );
-    } else {
-      console.log("location not set");
+    if (data) {
+      console.log(data.data.hotels);
+      setHotelData(data.data.hotels);
     }
-  }, [searchLocation]);
+  }, [data]);
 
   function hotelCardClickHandle(e) {
     const hotelId = e.currentTarget.id;
-    navigate(`/hotels/${searchLocation}/${hotelId}`);
+    // navigate(`/hotels/${searchLocation}/hotelId=${hotelId}?startDate=${startDate}&endDate=${endDate}`);
+    navigate(`/hotels/${searchLocation}/${hotelId}?startDate=${startDate}&endDate=${endDate}`);
   }
   const RenderHotelCard = () => {
     return (
       <div>
-        <h3>{hotelData.length} results for "{searchLocation}"</h3>
+        <h3>
+          {hotelData.length} results for "{searchLocation}"
+        </h3>
         {hotelData.map((item, index) => {
           return (
             <div
@@ -144,15 +107,21 @@ const Stays = () => {
       </div>
     );
   };
+
+  if (loading) return <p>Loading...</p>;
+
+  if (error) return <p>Some error occur</p>;
+
   return (
     <>
       <div className="stays-main-container">
         <div className="hotel-container">
           <div className="filter-container">
             <SearchFilter
-              initLocation={location}
-              UpdateSearchLocation={updateSearchLocation}
-              date={filterDate}
+              initLocation={searchLocation}
+              startDate={startDate}
+              endDate={endDate}
+              setSearchLocation={setSearchLocation}
             />
           </div>
           <div className="hotel-data">

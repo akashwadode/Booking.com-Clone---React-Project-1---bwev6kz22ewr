@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import DateRangeComponent from "../DateRangeComponent";
+import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import "./Styles/HomeSearchBar.css";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +7,7 @@ const HomeSearchBar = () => {
   const navigate = useNavigate();
   const [searchLocation, setSearchLocation] = useState("");
 
-  const [receivedDate, setReceivedDate] = useState("");
 
-  const [openDate, setOpenDate] = useState(false);
   const [countOptionOpen, setCountOptionOpen] = useState(false);
 
   const handleLocationInput = (input) => {
@@ -29,7 +26,6 @@ const HomeSearchBar = () => {
       setAdultCount(adultCount - 1);
     }
   };
-
   const handleChildIncrement = () => {
     if (childCount < 4) {
       setChildCount(childCount + 1);
@@ -41,20 +37,54 @@ const HomeSearchBar = () => {
     }
   };
 
+ 
+  const [dateRange, setDateRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+  const handleDateChange = (e, type) => {
+    setDateRange({
+      ...dateRange,
+      [type]: new Date(e.target.value),
+    });
+  };
+  
+  // const handleSearchSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (startDate && endDate) {
+  //     navigate(
+  //       `/hotels/${searchLocation}?startDate=${
+  //         startDate.toISOString().split("T")[0]
+  //       }&endDate=${endDate.toISOString().split("T")[0]}`
+  //     );
+  //   } else {
+  //     window.alert("Please enter dates");
+  //   }
+  // }
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/hotels/${searchLocation}?date=${receivedDate}`);
-    setSearchLocation("");
+    if (dateRange.startDate && dateRange.endDate && dateRange.startDate <= dateRange.endDate) {
+      navigate(
+        `/hotels/${searchLocation}?startDate=${dateRange.startDate.toISOString().split("T")[0]}&endDate=${dateRange.endDate.toISOString().split("T")[0]}`
+      );
+    } else {
+      window.alert("Please enter valid dates");
+    }
   };
+
+  useEffect(()=>{
+    setStartDate(new Date());
+    setEndDate(new Date());
+  },[])
+
   return (
     <div className="home-search-container">
       <div id="search-container">
         {" "}
         <form id="search-form" onSubmit={handleSearchSubmit}>
           <div className="input-item" id="location-input-container">
-            <TextField
+            <input
               placeholder="Where are you going?"
-              variant="outlined"
               type="text"
               name="location"
               value={searchLocation}
@@ -63,32 +93,25 @@ const HomeSearchBar = () => {
             />
           </div>
           <div className="input-item" id="date-input-container">
-            <TextField
-              placeholder="Today"
-              variant="outlined"
-              type="text"
-              name="date-input"
-              onClick={() => {
-                setCountOptionOpen(false);
-                setOpenDate(!openDate);
-              }}
-              value={receivedDate}
+          <input
+              type="date"
+              value={dateRange.startDate.toISOString().split("T")[0]}
+              onChange={(e) => handleDateChange(e, "startDate")}
+              min={new Date().toISOString().split("T")[0]}
+              required
             />
-            {openDate && (
-              <div className="absolute-container">
-                <DateRangeComponent
-                  sendDataToParent={(date) => {
-                    setReceivedDate(date);
-                  }}
-                />
-              </div>
-            )}
+            <input
+              type="date"
+              value={dateRange.endDate.toISOString().split("T")[0]}
+              onChange={(e) => handleDateChange(e, "endDate")}
+              min={dateRange.startDate.toISOString().split("T")[0]}
+              required
+            />
           </div>
           <div className="input-item" id="people-count-container">
             <div
               id="count-text-box"
               onClick={() => {
-                setOpenDate(false);
                 setCountOptionOpen(!countOptionOpen);
               }}
             >
